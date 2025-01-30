@@ -3,8 +3,9 @@ import asyncio
 import os
 from dotenv import load_dotenv
 
-from aiogram import Bot, Dispatcher, F
+from aiogram import Bot, Dispatcher
 from aiogram.types import Message
+from aiogram.filters import Command, CommandObject
 
 
 def solve(variant):
@@ -21,15 +22,15 @@ def solve(variant):
         return "ERROR!!!"
 
 
-async def echo(message: Message) -> None:
-    await message.answer(solve(message.text))
+async def solve_command(message: Message, command: CommandObject) -> None:
+    await message.reply(solve(command.args))
 
 
 async def main() -> None:
     bot_token = os.getenv("TOKEN")
 
     dp = Dispatcher()
-    dp.message.register(echo, F.text)
+    dp.message.register(solve_command, Command("kege"))
 
     bot = Bot(token=bot_token)
     await dp.start_polling(bot)
