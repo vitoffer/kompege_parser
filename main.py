@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from aiogram import Bot, Dispatcher
 from aiogram.types import Message
 from aiogram.filters import Command, CommandObject
+from aiogram.enums import ParseMode
 
 
 def solve(variant):
@@ -15,10 +16,10 @@ def solve(variant):
         k = 1
         res = ""
         for task in tasks:
-            text = f"{k}) "
+            text = f"<b>{k})</b> "
             if '\\n' in task['key']:
-                text += '↓\n'
-            text += task["key"].replace("\\n", "\n") + "\n"
+                text += '↓<br>'
+            text += task["key"].replace("\\n", "<br>") + "<br>"
             res += text
         return res
     except Exception:
@@ -26,7 +27,7 @@ def solve(variant):
 
 
 async def solve_command(message: Message, command: CommandObject) -> None:
-    await message.reply(solve(command.args))
+    await message.reply(solve(command.args), parse_mode=ParseMode.HTML)
 
 
 async def main() -> None:
