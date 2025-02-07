@@ -15,8 +15,11 @@ def solve(variant):
         k = 1
         res = ""
         for task in tasks:
-            res += f'{k}) {task["key"]}\n'
-            k += 1
+            text = f"{k}) "
+            if '\\n' in task['key']:
+                text += '↓\n'
+            text += f"{task["key"].replace("\\n", "\n")}\n"
+            res += text
         return res
     except Exception:
         return "ERROR!!!"
