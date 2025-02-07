@@ -15,7 +15,7 @@ def solve(variant):
         tasks = dct["tasks"]
         k = 1
         res = ""
-        for task in tasks:
+        for k, task in enumerate(tasks, 1):
             text = f"<b>{k})</b> "
             if '\\n' in task['key']:
                 text += '↓\n'
