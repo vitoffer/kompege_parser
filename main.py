@@ -18,7 +18,7 @@ def solve(variant):
             text = f"{k}) "
             if '\\n' in task['key']:
                 text += '↓\n'
-            text += f"{task["key"].replace("\\n", "\n")}\n"
+            text += task["key"].replace("\\n", "\n") + "\n"
             res += text
         return res
     except Exception:
