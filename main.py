@@ -18,8 +18,8 @@ def solve(variant):
         for task in tasks:
             text = f"<b>{k})</b> "
             if '\\n' in task['key']:
-                text += '↓<br>'
-            text += task["key"].replace("\\n", "<br>") + "<br>"
+                text += '↓\n'
+            text += task["key"].replace("\\n", "\n") + "\n"
             res += text
         return res
     except Exception:
